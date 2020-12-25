@@ -29,6 +29,11 @@ export default {
             type: "raster",
             tiles: [imgUrl + "&T=img_w&x={x}&y={y}&l={z}"],
             tileSize: 256
+          },
+          geoServer: {
+            type: "geojson",
+            data:
+              "http://172.16.3.36:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite:hangzhou_erase&maxFeatures=50&outputFormat=application%2Fjson"
           }
         },
         layers: [
@@ -38,6 +43,21 @@ export default {
             source: "tdtImg",
             minzoom: 0,
             maxzoom: 18
+          },
+          {
+            id: "geoServer",
+            type: "fill",
+            source: "geoServer",
+            paint: {
+              "fill-color": [
+                "match",
+                ["get", "NAME99"],
+                "杭州",
+                "rgba(255,0,255,0)",
+                "rgba(0,0,0,0.7)"
+              ],
+              "fill-outline-color": "rgba(95,120,202,1)"
+            }
           }
         ]
       },
