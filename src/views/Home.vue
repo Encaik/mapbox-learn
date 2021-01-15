@@ -62,7 +62,17 @@ export default {
         ]
       },
       minZoom: 0,
-      maxZoom: 17
+      maxZoom: 17,
+      maxBounds: [
+        [73.33, 3.51],
+        [135.05, 53.33]
+      ]
+    });
+    this.map.on("load", () => {
+      this.map.flyTo({
+        center: [this.$route.query.lon, this.$route.query.lat],
+        zoom: 9
+      });
     });
   }
 };
